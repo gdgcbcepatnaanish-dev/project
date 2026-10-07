@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CyberShield — AI Phishing Detector</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<div class="app">
+
+  <!-- ── NAV ── -->
+  <nav>
+    <div class="nav-brand">
+      <div class="logo-icon">
+        <svg viewBox="0 0 40 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20 2L4 8v14c0 9.4 6.9 18.1 16 20.4C29.1 40.1 36 31.4 36 22V8L20 2z" stroke="#00ff9d" stroke-width="2" fill="none"/>
+          <path d="M13 22l5 5 9-9" stroke="#00ff9d" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div>
+        <div class="brand-name">CYBERSHIELD</div>
+        <div class="brand-sub">AI Threat Intelligence</div>
+      </div>
+    </div>
+    <div class="nav-right">
+      <div class="status-badge">
+        <span class="status-dot"></span>
+        ANALYZER ONLINE
+      </div>
+    </div>
+  </nav>
+
+  <!-- ── HERO ── -->
+  <section class="hero">
+    <div class="hero-text">
+      <p class="eyebrow">PHISHING &amp; MALICIOUS URL DETECTOR</p>
+      <h1>Detect threats<br><span class="accent">before they strike.</span></h1>
+      <p class="intro">Paste any URL or suspicious message. CyberShield analyzes it using explainable heuristic rules and returns an instant risk verdict.</p>
+      <div class="verdicts-preview">
+        <span class="badge safe">🟢 SAFE</span>
+        <span class="badge suspicious">🟡 SUSPICIOUS</span>
+        <span class="badge malicious">🔴 MALICIOUS</span>
+      </div>
+    </div>
+    <div class="hero-graphic">
+      <div class="orbit-ring ring1"></div>
+      <div class="orbit-ring ring2"></div>
+      <div class="orbit-ring ring3"></div>
+      <div class="shield-center">
+        <svg viewBox="0 0 80 88" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M40 4L8 16v28c0 18.8 13.8 36.2 32 40.8C58.2 80.2 72 62.8 72 44V16L40 4z" stroke="#00ff9d" stroke-width="2.5" fill="rgba(0,255,157,0.06)"/>
+          <path d="M26 44l10 10 18-18" stroke="#00ff9d" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SCANNER ── -->
+  <section class="scanner-section">
+    <div class="tabs">
+      <button class="tab active" data-type="url">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        URL SCANNER
+      </button>
+      <button class="tab" data-type="message">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        MESSAGE ANALYZER
+      </button>
+    </div>
+
+    <div class="scanner-body">
+      <label id="label">Enter a URL to analyze</label>
+      <textarea id="target" rows="4" placeholder="https://example.com/login?verify=account"></textarea>
+      <button id="scan-btn">
+        <span id="btn-text">SCAN FOR THREATS</span>
+        <svg id="btn-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        <span id="btn-spinner" class="spinner hidden"></span>
+      </button>
+    </div>
+
+    <!-- ── RESULT ── -->
+    <div id="result" class="result-card hidden">
+      <div class="result-header">
+        <div class="result-icon" id="result-icon"></div>
+        <div>
+          <div class="result-verdict" id="result-verdict">—</div>
+          <div class="result-label">Threat Verdict</div>
+        </div>
+        <div class="gauge-wrap">
+          <svg class="gauge" viewBox="0 0 120 70">
+            <path d="M10 65 A50 50 0 0 1 110 65" stroke="#1a2e35" stroke-width="10" fill="none"/>
+            <path id="gauge-arc" d="M10 65 A50 50 0 0 1 110 65" stroke="#00ff9d" stroke-width="10" fill="none"
+                  stroke-dasharray="157" stroke-dashoffset="157" stroke-linecap="round"
+                  style="transition: stroke-dashoffset 1s ease, stroke 0.6s ease"/>
+          </svg>
+          <div class="gauge-score"><span id="score-num">0</span><small>/100</small></div>
+        </div>
+      </div>
+      <div class="result-reasons">
+        <p class="reasons-title">Analysis Findings</p>
+        <ul id="reasons-list"></ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── STATS DASHBOARD ── -->
+  <section class="dashboard">
+    <div class="section-header">
+      <span>SCAN OVERVIEW</span>
+      <small>Local database</small>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-card safe-card">
+        <div class="stat-icon">🟢</div>
+        <strong id="safe">0</strong>
+        <span>SAFE</span>
+      </div>
+      <div class="stat-card suspicious-card">
+        <div class="stat-icon">🟡</div>
+        <strong id="suspicious">0</strong>
+        <span>SUSPICIOUS</span>
+      </div>
+      <div class="stat-card malicious-card">
+        <div class="stat-icon">🔴</div>
+        <strong id="malicious">0</strong>
+        <span>MALICIOUS</span>
+      </div>
+      <div class="stat-card total-card">
+        <div class="stat-icon">🛡️</div>
+        <strong id="total">0</strong>
+        <span>TOTAL SCANS</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── RECENT SCANS ── -->
+  <section class="recent-section">
+    <div class="section-header">
+      <span>RECENT ANALYSIS</span>
+      <button id="refresh-btn" class="refresh-btn">↻ Refresh</button>
+    </div>
+    <div id="recent-list" class="recent-list">
+      <div class="no-scans">No scans yet. Analyze a URL or message above to get started.</div>
+    </div>
+  </section>
+
+  <!-- ── HOW IT WORKS ── -->
+  <section class="how-section">
+    <div class="section-header"><span>HOW IT WORKS</span></div>
+    <div class="how-grid">
+      <div class="how-card">
+        <div class="how-num">01</div>
+        <h3>Paste Input</h3>
+        <p>Enter any URL or paste a suspicious email, SMS, or chat message into the scanner.</p>
+      </div>
+      <div class="how-card">
+        <div class="how-num">02</div>
+        <h3>Heuristic Analysis</h3>
+        <p>CyberShield runs over 10 security rules — detecting IP hosts, phishing keywords, missing HTTPS, and more.</p>
+      </div>
+      <div class="how-card">
+        <div class="how-num">03</div>
+        <h3>Risk Score</h3>
+        <p>Each indicator adds to a 0–100 risk score. A clear verdict is returned with an explanation of every finding.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    CyberShield — Educational cybersecurity project · Results are heuristic indicators, not a guarantee of safety.
+  </footer>
+</div>
+
+<script src="/static/app.js"></script>
+</body>
+</html>

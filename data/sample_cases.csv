@@ -1,0 +1,6 @@
+type,input,expected
+url,https://www.wikipedia.org,SAFE
+url,http://secure-login-example.com/verify-account,SUSPICIOUS
+url,http://192.168.1.50/login?verify=password,MALICIOUS
+message,Your account is suspended. Verify your password immediately.,MALICIOUS
+message,Meeting is scheduled for 4 PM today.,SAFE

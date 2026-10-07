@@ -1,0 +1,51 @@
+You are helping me complete a college cybersecurity project called CyberShield.
+
+Goal:
+Build a web application that detects phishing URLs and suspicious messages and returns:
+1. SAFE / SUSPICIOUS / MALICIOUS
+2. Risk score from 0 to 100
+3. Clear reasons for the classification
+4. Scan history and dashboard statistics
+
+Technology:
+- Python 3
+- Flask
+- SQLite
+- HTML/CSS/JavaScript
+- Keep dependencies minimal.
+
+Project requirements:
+- Create app.py
+- Create templates/index.html
+- Create static/style.css
+- Create static/app.js
+- Create requirements.txt
+- Create README.md
+- Use SQLite automatically on startup.
+- Do not require an external API for the base version.
+- Do not make offensive cybersecurity tools. This is strictly defensive/educational.
+
+URL indicators:
+HTTPS, IP address, URL length, @ symbol, subdomain count, hyphens, special characters, digits and phishing-related words.
+
+Message indicators:
+Urgency, password/OTP/PIN/CVV requests, financial/payment terms, suspicious links, phishing-related words and calls to action.
+
+Classification:
+0–29 SAFE
+30–59 SUSPICIOUS
+60–100 MALICIOUS
+
+Important:
+Make the UI professional and dark cybersecurity themed.
+Add clear comments to Python functions.
+Validate empty input.
+Escape/handle user input safely.
+Do not claim the detector is 100% accurate.
+Add sample demo inputs to the README.
+
+After implementation:
+- Run the app.
+- Test a safe URL, suspicious URL and phishing message.
+- Fix any runtime errors.
+- Explain every major file in simple language so I can present it in a college viva.
